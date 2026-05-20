@@ -4,10 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>竹石體發光文字</title>
-
-<!-- 楊任東竹石體 -->
-<link href="https://fonts.googleapis.com/earlyaccess/cwtexyen.css" rel="stylesheet">
+<title>竹石印刷感</title>
 
 <style>
 
@@ -20,7 +17,7 @@
 html,body{
     width:100%;
     height:100%;
-    background:#000;
+    background:black;
     overflow:hidden;
 }
 
@@ -28,9 +25,10 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    position:relative;
 }
 
-/* 星空背景 */
+/* 星空 */
 
 .stars{
     position:absolute;
@@ -44,71 +42,68 @@ body{
     height:2px;
     background:white;
     border-radius:50%;
-    opacity:0;
+    opacity:0.3;
     animation: twinkle 4s infinite;
 }
 
 @keyframes twinkle{
-    0%,100%{
-        opacity:0.1;
-    }
-
     50%{
         opacity:1;
     }
 }
 
-/* 主文字 */
+/* 印刷感文字 */
 
 .text{
-    position:relative;
-    z-index:2;
 
     color:white;
 
-    font-family: "cwTeXYen", sans-serif;
+    font-size:clamp(48px,7vw,110px);
 
-    font-size: clamp(42px, 6vw, 100px);
+    letter-spacing:12px;
 
-    letter-spacing:10px;
-
-    text-align:center;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    border-right: 3px solid rgba(255,255,255,0.8);
-
-    width:0;
+    font-family:
+    "DFKai-SB",
+    "KaiTi",
+    serif;
 
     text-shadow:
-        0 0 8px rgba(255,255,255,0.9),
-        0 0 20px rgba(255,255,255,0.8),
-        0 0 40px rgba(255,255,255,0.6);
+        0 0 8px rgba(255,255,255,0.8),
+        0 0 18px rgba(255,255,255,0.7),
+        0 0 35px rgba(255,255,255,0.5);
 
-    animation:
-        typing 3s steps(12,end) forwards,
-        cursor 0.8s infinite;
+    opacity:0;
+
+    filter:blur(10px);
+
+    transform:scale(1.05);
+
+    animation: printReveal 2.8s ease forwards;
 }
 
-/* 印刷打字效果 */
+/* 印刷浮現 */
 
-@keyframes typing{
-    from{
-        width:0;
+@keyframes printReveal{
+
+    0%{
+        opacity:0;
+        filter:blur(12px);
+        letter-spacing:20px;
     }
 
-    to{
-        width:12ch;
+    40%{
+        opacity:0.4;
     }
-}
 
-/* 游標閃爍 */
+    70%{
+        filter:blur(2px);
+    }
 
-@keyframes cursor{
-    50%{
-        border-color:transparent;
+    100%{
+        opacity:1;
+        filter:blur(0px);
+        letter-spacing:12px;
+        transform:scale(1);
     }
 }
 
@@ -125,11 +120,9 @@ body{
 
 <script>
 
-/* 星星生成 */
-
 const stars = document.querySelector('.stars');
 
-for(let i=0;i<100;i++){
+for(let i=0;i<120;i++){
 
     const star = document.createElement('div');
 
@@ -140,9 +133,6 @@ for(let i=0;i<100;i++){
 
     star.style.animationDelay =
         Math.random()*5 + 's';
-
-    star.style.animationDuration =
-        (2 + Math.random()*4) + 's';
 
     stars.appendChild(star);
 }
