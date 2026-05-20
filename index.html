@@ -1,37 +1,210 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>漫語體發光文字</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- 漫語體字型 -->
+<title>漫語體氛圍文字</title>
+
 <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
 
 <style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    font-family:'ZCOOL KuaiLe', cursive;
+}
+
+/* 星空背景 */
+
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    opacity:0;
+    animation: twinkle linear infinite;
+}
+
+@keyframes twinkle{
+    0%{
+        opacity:0;
+        transform:scale(0.5);
     }
 
-    body{
-        width:100vw;
-        height:100vh;
-        background:#000;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        overflow:hidden;
+    50%{
+        opacity:1;
+        transform:scale(1);
     }
 
-    .text{
-        font-family: 'ZCOOL KuaiLe', cursive;
-        color:white;
-        font-size: clamp(40px, 8vw, 110px);
-        letter-spacing: 6px;
-        text-align:center;
+    100%{
+        opacity:0;
+        transform:scale(0.5);
+    }
+}
 
-        /* 發光效果 */
-        text-shadow:
-            0 0 5px rgba
+/* 主文字 */
+
+.text-box{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:30px;
+}
+
+.glow-text{
+    color:white;
+    font-size: clamp(42px, 7vw, 110px);
+    letter-spacing:8px;
+    line-height:1.5;
+
+    opacity:0;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.9),
+        0 0 20px rgba(255,255,255,0.8),
+        0 0 40px rgba(255,255,255,0.7),
+        0 0 80px rgba(255,255,255,0.6);
+
+    animation:
+        fadeIn 3s ease forwards,
+        breathing 3s ease-in-out infinite alternate;
+}
+
+/* 副文字 */
+
+.sub{
+    margin-top:25px;
+    color:rgba(255,255,255,0.6);
+    font-size:18px;
+    letter-spacing:4px;
+    opacity:0;
+    animation: fadeIn 3s ease forwards;
+    animation-delay:1.5s;
+}
+
+/* 淡入 */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* 呼吸感 */
+
+@keyframes breathing{
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.03);
+    }
+}
+
+/* 黑霧 */
+
+.fog{
+    position:absolute;
+    width:150%;
+    height:150%;
+    background:
+    radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+    animation: fogMove 12s linear infinite;
+}
+
+@keyframes fogMove{
+    0%{
+        transform:translate(-5%,-5%);
+    }
+
+    50%{
+        transform:translate(5%,5%);
+    }
+
+    100%{
+        transform:translate(-5%,-5%);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="fog"></div>
+
+<div class="text-box">
+    <div class="glow-text">
+        原來喜歡<br>
+        是這種感覺
+    </div>
+
+    <div class="sub">
+        LOVE CHANGED EVERYTHING
+    </div>
+</div>
+
+<script>
+
+/* 生成星星 */
+
+const stars = document.querySelector('.stars');
+
+for(let i=0;i<120;i++){
+
+    const star = document.createElement('div');
+    star.classList.add('star');
+
+    let size = Math.random()*3;
+
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+
+    star.style.left = Math.random()*100 + '%';
+    star.style.top = Math.random()*100 + '%';
+
+    star.style.animationDuration =
+        (2 + Math.random()*5) + 's';
+
+    star.style.animationDelay =
+        Math.random()*5 + 's';
+
+    stars.appendChild(star);
+}
+
+</script>
+
+</body>
+</html>
