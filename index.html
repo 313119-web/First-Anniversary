@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <title>我的網站</title>
-</head>
-<body>
-<h1>嗨！成功了</h1>
-</body>
-</html>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>漫語體發光文字</title>
+
+<!-- 漫語體字型 -->
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    body{
+        width:100vw;
+        height:100vh;
+        background:#000;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        overflow:hidden;
+    }
+
+    .text{
+        font-family: 'ZCOOL KuaiLe', cursive;
+        color:white;
+        font-size: clamp(40px, 8vw, 110px);
+        letter-spacing: 6px;
+        text-align:center;
+
+        /* 發光效果 */
+        text-shadow:
+            0 0 5px rgba
