@@ -287,7 +287,7 @@ filter:blur(8px);
 
 </head> 
 
-<body onclick="nextScene()">
+<body onclick="startMusic(); nextScene()">
 
 <!-- 🌌 星層 -->
 <div class="layer-back"></div>
@@ -387,6 +387,8 @@ filter:blur(8px);
     </h1>
 </div>
 
+<audio id="bgm" src="./Time To Love.mp3" loop></audio>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -418,6 +420,30 @@ window.nextScene = function () {
     goNext();
 };
 });
+
+const bgm = document.getElementById("bgm");
+let started = false;
+
+function startMusic(){
+    if(started) return;
+    started = true;
+
+    bgm.volume = 0;
+    bgm.play();
+
+    // 淡入
+    let v = 0;
+    let timer = setInterval(() => {
+        v += 0.05;
+        bgm.volume = v;
+
+        if(v >= 0.8){
+            bgm.volume = 0.8;
+            clearInterval(timer);
+        }
+    }, 100);
+}
+
 </script>
 
 </body>
