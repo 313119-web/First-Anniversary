@@ -469,6 +469,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+bgm.addEventListener("error", () => {
+    console.log("❌ 音檔載入失敗");
+});
+
+bgm.addEventListener("canplaythrough", () => {
+    console.log("✔ 音檔已成功載入");
+});
+
 </script>
 
 </body>
