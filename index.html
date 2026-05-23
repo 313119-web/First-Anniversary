@@ -390,75 +390,84 @@ filter:blur(8px);
 <audio id="bgm" src="./Time To Love.mp3" loop></audio>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
 
-let index = 0;
+const bgm = document.getElementById("bgm");
 
-window.nextScene = function(){
+function startMusic(){
+    if(bgm.paused){
+        bgm.volume = 0;
+        bgm.play();
 
-    const scenes = document.querySelectorAll(".scene");
-    const currentScene = scenes[index];
-
-    if(!currentScene) return;
-
-    const img = currentScene.querySelector("img");
-
-    if(img){
-        img.classList.add("fade-out");
-
-        setTimeout(() => {
-
-            currentScene.classList.remove("active");
-
-            index++;
-
-            // 🎵 最後一頁音樂淡出
-            if(index === scenes.length - 1){
-                let v = bgm.volume;
-
-                let timer = setInterval(() => {
-                    v -= 0.05;
-                    bgm.volume = v;
-
-                    if(v <= 0){
-                        bgm.pause();
-                        clearInterval(timer);
-                    }
-                }, 100);
-            }
-
-            if(index >= scenes.length) return;
-
-            scenes[index].classList.add("active");
-
-        }, 1200);
-
-        return;
-    }
-
-    currentScene.classList.remove("active");
-
-    index++;
-
-    // 🎵 最後一頁音樂淡出
-    if(index === scenes.length - 1){
-        let v = bgm.volume;
-
-        let timer = setInterval(() => {
-            v -= 0.05;
+        let v = 0;
+        let fadeIn = setInterval(() => {
+            v += 0.05;
             bgm.volume = v;
-
-            if(v <= 0){
-                bgm.pause();
-                clearInterval(timer);
-            }
+            if(v >= 1) clearInterval(fadeIn);
         }, 100);
     }
+}
 
-    if(index >= scenes.length) return;
+function fadeOutMusic(){
+    let v = bgm.volume;
 
-    scenes[index].classList.add("active");
-};
+    let timer = setInterval(() => {
+        v -= 0.05;
+        bgm.volume = v;
+
+        if(v <= 0){
+            bgm.pause();
+            clearInterval(timer);
+        }
+    }, 100);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    let index = 0;
+
+    window.nextScene = function(){
+
+        const scenes = document.querySelectorAll(".scene");
+        const currentScene = scenes[index];
+
+        if(!currentScene) return;
+
+        const img = currentScene.querySelector("img");
+
+        // 🌸 如果有圖片 → 先退場動畫
+        if(img){
+            img.classList.add("fade-out");
+
+            setTimeout(() => {
+                currentScene.classList.remove("active");
+                index++;
+
+                if(index === scenes.length - 1){
+                    fadeOutMusic();
+                }
+
+                if(index < scenes.length){
+                    scenes[index].classList.add("active");
+                }
+            }, 1200);
+
+            return;
+        }
+
+        // 🌸 沒圖片直接切場景
+        currentScene.classList.remove("active");
+        index++;
+
+        if(index === scenes.length - 1){
+            fadeOutMusic();
+        }
+
+        if(index < scenes.length){
+            scenes[index].classList.add("active");
+        }
+    };
+
+});
 
 </script>
 
