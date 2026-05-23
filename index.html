@@ -371,6 +371,7 @@ filter:blur(8px);
 
 <div class="scene">
     <h1 class="typing">让我们一起欣赏拼图吧~</h1>
+
 </div>
 <div class="scene"><h1 class="typing">小奈说：我们还要一起走，好久好久..</h1></div>
 
@@ -393,15 +394,15 @@ let index = 0;
 
 window.nextScene = function () {
     const scenes = document.querySelectorAll(".scene");
-    const current = scenes[index];
 
+    scenes.forEach(s => s.classList.remove("active"));
+
+    const current = scenes[index];
     if (!current) return;
 
     const img = current.querySelector("img");
 
     const goNext = () => {
-        current.classList.remove("active");
-
         index++;
         if (index >= scenes.length) return;
 
@@ -410,7 +411,6 @@ window.nextScene = function () {
 
     if (img) {
         img.classList.add("fade-out");
-
         setTimeout(goNext, 1200);
         return;
     }
