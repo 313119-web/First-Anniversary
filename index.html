@@ -394,54 +394,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let index = 0;
 
-window.nextScene = function () {
+window.nextScene = function(){
+
     const scenes = document.querySelectorAll(".scene");
+    const currentScene = scenes[index];
 
-    scenes.forEach(s => s.classList.remove("active"));
+    if(!currentScene) return;
 
-    const current = scenes[index];
-    if (!current) return;
+    const img = currentScene.querySelector("img");
 
-    const img = current.querySelector("img");
-
-    const goNext = () => {
-        index++;
-        if (index >= scenes.length) return;
-
-        scenes[index].classList.add("active");
-    };
-
-    if (img) {
+    if(img){
         img.classList.add("fade-out");
-        setTimeout(goNext, 1200);
+
+        setTimeout(() => {
+
+            currentScene.classList.remove("active");
+
+            index++;
+
+            // 🎵 最後一頁音樂淡出
+            if(index === scenes.length - 1){
+                let v = bgm.volume;
+
+                let timer = setInterval(() => {
+                    v -= 0.05;
+                    bgm.volume = v;
+
+                    if(v <= 0){
+                        bgm.pause();
+                        clearInterval(timer);
+                    }
+                }, 100);
+            }
+
+            if(index >= scenes.length) return;
+
+            scenes[index].classList.add("active");
+
+        }, 1200);
+
         return;
     }
 
-    goNext();
+    currentScene.classList.remove("active");
+
+    index++;
+
+    // 🎵 最後一頁音樂淡出
+    if(index === scenes.length - 1){
+        let v = bgm.volume;
+
+        let timer = setInterval(() => {
+            v -= 0.05;
+            bgm.volume = v;
+
+            if(v <= 0){
+                bgm.pause();
+                clearInterval(timer);
+            }
+        }, 100);
+    }
+
+    if(index >= scenes.length) return;
+
+    scenes[index].classList.add("active");
 };
-});
-
-const bgm = document.getElementById("bgm");
-let started = false;
-
-function startMusic(){
-    if(started) return;
-    started = true;
-
-    bgm.volume = 0;
-    bgm.play();
-
-    // 淡入
-    let v = 0;
-    let timer = setInterval(() => {
-        v += 0.05;
-        bgm.volume = v;
-
-        if(v >= 0.8){
-            bgm.volume = 0.8;
-            clearInterval(timer);
-        }
-    }, 100);
 }
 
 </script>
