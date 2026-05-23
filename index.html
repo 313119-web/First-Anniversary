@@ -391,38 +391,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let index = 0;
 
-window.nextScene = function(){
-
+window.nextScene = function () {
     const scenes = document.querySelectorAll(".scene");
-    const currentScene = scenes[index];
+    const current = scenes[index];
 
-    if(!currentScene) return;
+    if (!current) return;
 
-    const img = currentScene.querySelector("img");
+    const img = current.querySelector("img");
 
-    if(img){
+    const goNext = () => {
+        current.classList.remove("active");
+
+        index++;
+        if (index >= scenes.length) return;
+
+        scenes[index].classList.add("active");
+    };
+
+    if (img) {
         img.classList.add("fade-out");
 
-        setTimeout(() => {
-            currentScene.classList.remove("active");
-
-            index++;
-            if(index >= scenes.length) return;
-
-            scenes[index].classList.add("active");
-        }, 1200);
-
+        setTimeout(goNext, 1200);
         return;
     }
 
-    currentScene.classList.remove("active");
-
-    index++;
-    if(index >= scenes.length) return;
-
-    scenes[index].classList.add("active");
+    goNext();
 };
-
 });
 </script>
 
