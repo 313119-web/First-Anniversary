@@ -69,12 +69,18 @@ h1,h2{
 
     max-width:900px;
 
-    color:#4a78c2; /* 淡藍 */
-    text-shadow:
-    0 2px 6px rgba(0,0,0,.18),
-    0 0 18px rgba(255,120,160,.15); /* 淡紅光感 */
-}
+    /* 🌸 淡藍紅混合字色 */
+    color:transparent;
+    background:linear-gradient(90deg,#6fa8ff,#ff8fb1);
+    -webkit-background-clip:text;
+    background-clip:text;
 
+    /* 🌸 柔和陰影 */
+    text-shadow:
+    0 2px 10px rgba(0,0,0,.18),
+    0 0 14px rgba(111,168,255,.25),
+    0 0 14px rgba(255,143,177,.18);
+} 
 h1{
     font-size:clamp(32px,6vw,72px);
     color:#ff7aa2; /* 標題偏粉紅 */
