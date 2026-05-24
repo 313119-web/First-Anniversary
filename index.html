@@ -3,17 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>巧虎的星夜回憶</title>
+<title>巧虎的回憶</title>
 
 <style>
 
-/* 🌸 字體 */
-@font-face{
-    font-family:"DongZhu";
-    src:url("./DongZhu.ttf") format("truetype");
-}
-
-/* 🌸 白底基礎 */
 body{
     margin:0;
     overflow:hidden;
@@ -53,122 +46,34 @@ body{
     transform:scale(1);
 }
 
-/* 🌸 ⭐真正淡藍＋淡紅文字（重點修好） */
+/* 🌸 淡藍紅字 */
 h1,h2{
     margin:0;
     font-weight:normal;
 
     line-height:1.8;
-    white-space:normal;
-
     max-width:900px;
 
-    /* 淡藍→淡粉漸層 */
     background:linear-gradient(90deg,#6fa8ff,#ff8fb1);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
 
-    /* 柔陰影（去掉黃光） */
     text-shadow:
-    0 2px 8px rgba(0,0,0,.18),
-    0 0 10px rgba(111,168,255,.18),
+    0 2px 8px rgba(0,0,0,.15),
+    0 0 10px rgba(111,168,255,.15),
     0 0 10px rgba(255,143,177,.12);
 }
 
-/* 🌸 標題稍微偏粉紅 */
-h1{
-    font-size:clamp(32px,6vw,72px);
-}
-
-/* 🌸 內容字 */
-h2{
-    font-size:clamp(20px,4vw,40px);
-}
-
-/* 🌸 打字效果（穩定版） */
-.typing{
-    display:inline-block;
-    animation:fadeIn 2s ease forwards;
-}
-
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px);
-        filter:blur(6px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-        filter:blur(0);
-    }
-}
-
-/* 🌸 浮現 */
-.floatUp{
-    opacity:0;
-    transform:translateY(40px);
-    animation:floatUp 1.6s ease forwards;
-}
-
-@keyframes floatUp{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
+h1{font-size:clamp(30px,6vw,64px);}
+h2{font-size:clamp(18px,4vw,38px);}
 
 /* 🌸 圖片 */
 .scene img{
-    width:min(78vw,520px);
-    max-width:100%;
+    width:min(80vw,520px);
     border-radius:18px;
 
-    box-shadow:
-    0 8px 25px rgba(0,0,0,.15),
-    0 0 25px rgba(255,120,160,.12);
-}
-
-/* 🌸 圖片進場 */
-.scene.active img{
-    animation:imgIn 1.5s ease forwards;
-}
-
-@keyframes imgIn{
-    from{
-        opacity:0;
-        transform:scale(1.05);
-        filter:blur(8px);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-        filter:blur(0);
-    }
-}
-
-/* 🌸 圖片退場 */
-.scene img.fade-out{
-    animation:imgOut 1s ease forwards;
-}
-
-@keyframes imgOut{
-    from{
-        opacity:1;
-        transform:scale(1);
-    }
-    to{
-        opacity:0;
-        transform:scale(.95);
-    }
-}
-
-/* 🌸 連結 */
-a.starlink{
-    color:#ff7aa2;
-    text-decoration:none;
-    text-shadow:0 2px 10px rgba(255,120,160,.25);
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
 /* 🌸 按鈕 */
@@ -182,20 +87,7 @@ a.starlink{
     letter-spacing:3px;
 
     color:#6fa8ff;
-
     cursor:pointer;
-    opacity:.8;
-}
-
-#nextBtn:hover{
-    opacity:1;
-}
-
-/* 🌸 手機 */
-@media(max-width:768px){
-    h1{font-size:clamp(24px,7vw,36px);}
-    h2{font-size:clamp(16px,4.8vw,24px);}
-    .scene img{width:88vw;}
 }
 
 </style>
@@ -203,72 +95,58 @@ a.starlink{
 
 <body onclick="startMusic()">
 
-<audio id="bgm" src="./time-to-love.mp3" loop></audio>
+<!-- 🌸 音樂（已改） -->
+<audio id="bgm" src="./可愛巧虎島.mp3" loop></audio>
 
 <!-- 🌸 第一幕 -->
 <div class="scene active">
-    <h1 class="typing">嗨！我是巧虎 🧸</h1>
+    <h1>嗨！我是巧虎 🧸</h1>
 </div>
 
 <!-- 🌸 第二幕 -->
 <div class="scene">
-    <h2 class="floatUp">
+    <h2>
         還記得嗎？<br>
-        小時候總會坐在電視前等著我出現。
+        小時候的我們都會等我出現。
     </h2>
 </div>
 
 <!-- 🌸 第三幕 -->
 <div class="scene">
-    <img src="./qiaohu1.png">
+    <img src="./11.png">
 </div>
 
 <!-- 🌸 第四幕 -->
 <div class="scene">
-    <h2 class="floatUp">
-        那時候的世界好小。<br>
-        一首歌、一個玩偶、一句鼓勵。
+    <h2>
+        那時候的世界很簡單。<br>
+        一首歌、一個玩偶、一點陪伴。
     </h2>
 </div>
 
 <!-- 🌸 第五幕 -->
 <div class="scene">
-    <img src="./qiaohu2.png">
+    <img src="./12.png">
 </div>
 
 <!-- 🌸 第六幕 -->
 <div class="scene">
-    <h2 class="floatUp">
-        你曾經學刷牙、學分享、學勇敢。<br>
-        也曾經偷偷哭過吧？
+    <h2>
+        你學會分享、學會勇敢、學會長大。
     </h2>
 </div>
 
 <!-- 🌸 第七幕 -->
 <div class="scene">
-    <img src="./01.png">
-</div>
-
-<!-- 🌸 第八幕 -->
-<div class="scene">
-    <h2 class="floatUp">
-        原來不知不覺，我們已經長大了。
-    </h2>
-</div>
-
-<!-- 🌸 第九幕 -->
-<div class="scene">
-    <h1 class="typing">
-        但我還是會一直陪著你 ✨
+    <h1>
+        但我還是會陪著你 ✨
     </h1>
 </div>
 
 <!-- 🌸 最後 -->
 <div class="scene">
     <h2>
-        <a class="starlink" href="https://313119-web.github.io/First-Anniversary/">
-            點我回到回憶裡 ✦
-        </a>
+        點一下畫面繼續回憶
     </h2>
 </div>
 
@@ -292,44 +170,24 @@ function startMusic(){
     }
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
+let index = 0;
 
-    let index = 0;
+function nextScene(){
 
-    window.nextScene = function(){
+    const scenes = document.querySelectorAll(".scene");
 
-        const scenes = document.querySelectorAll(".scene");
-        const current = scenes[index];
+    const current = scenes[index];
+    if(!current) return;
 
-        if(!current) return;
+    current.classList.remove("active");
+    index++;
 
-        const img = current.querySelector("img");
+    if(index < scenes.length){
+        scenes[index].classList.add("active");
+    }
+}
 
-        if(img){
-            img.classList.add("fade-out");
-
-            setTimeout(()=>{
-                current.classList.remove("active");
-                index++;
-                if(index < scenes.length){
-                    scenes[index].classList.add("active");
-                }
-            },1000);
-
-            return;
-        }
-
-        current.classList.remove("active");
-        index++;
-
-        if(index < scenes.length){
-            scenes[index].classList.add("active");
-        }
-    };
-
-});
-
-document.getElementById("nextBtn").onclick = ()=> nextScene();
+document.getElementById("nextBtn").onclick = nextScene;
 
 </script>
 
