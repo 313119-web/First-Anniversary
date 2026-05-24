@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>星夜空</title>
+<title>巧虎的星夜回憶</title>
 
 <style>
 
@@ -16,15 +16,33 @@
 /* 🌌 基礎 */
 body{
     margin:0;
-    background:#0b0b14;
     overflow:hidden;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
+    background:
+    radial-gradient(circle at top,#1f2242,#0b0b14 60%);
+
     font-family:"DongZhu","Noto Serif TC",serif;
     color:white;
+}
+
+/* 🌸 復古粒子 */
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+    radial-gradient(rgba(255,220,160,.15) 1px, transparent 1px);
+
+    background-size:4px 4px;
+
+    opacity:.25;
+    pointer-events:none;
+    mix-blend-mode:screen;
 }
 
 /* 🌌 星空 */
@@ -35,24 +53,27 @@ body{
 .layer-back{
     position:fixed;
     inset:0;
-    background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.25)1px,transparent 2px);
-    animation: drift 40s linear infinite;
+    background:
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,.25)1px,transparent 2px);
+    animation:drift 40s linear infinite;
     opacity:.5;
 }
 
 .layer-mid{
     position:fixed;
     inset:0;
-    background:radial-gradient(circle at 60% 50%,rgba(255,230,180,.4)1.5px,transparent 3px);
-    animation: drift 25s linear infinite;
+    background:
+    radial-gradient(circle at 60% 50%,rgba(255,230,180,.4)1.5px,transparent 3px);
+    animation:drift 25s linear infinite;
     opacity:.6;
 }
 
 .layer-front{
     position:fixed;
     inset:0;
-    background:radial-gradient(circle at 30% 80%,rgba(255,255,255,.8)2px,transparent 3px);
-    animation: drift 12s linear infinite;
+    background:
+    radial-gradient(circle at 30% 80%,rgba(255,255,255,.8)2px,transparent 3px);
+    animation:drift 12s linear infinite;
     opacity:.8;
 }
 
@@ -65,14 +86,20 @@ body{
 .hud{
     position:fixed;
     inset:0;
-    border:1px solid rgba(255,230,150,.15);
+    border:1px solid rgba(255,230,150,.12);
 }
 
 /* 🌌 掃描線 */
 .scanline{
     position:fixed;
     inset:0;
-    background:linear-gradient(to bottom,transparent,rgba(255,230,150,.05),transparent);
+    background:
+    linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,230,150,.05),
+    transparent);
+
     animation:scan 5s linear infinite;
 }
 
@@ -81,7 +108,7 @@ body{
     to{transform:translateY(100%);}
 }
 
-/* 🌌 場景（真正置中） */
+/* 🌌 場景 */
 .scene{
     position:absolute;
     inset:0;
@@ -92,15 +119,19 @@ body{
 
     text-align:center;
 
-    padding:0 20px;
+    padding:30px;
     box-sizing:border-box;
 
+    opacity:0;
     transform:scale(1.03);
     filter:blur(6px);
-    transition:opacity .8s ease, transform .8s ease, filter .8s ease;
+
+    transition:
+    opacity .8s ease,
+    transform .8s ease,
+    filter .8s ease;
 }
 
-/* 只保留唯一 active 規則 */
 .scene.active{
     display:flex;
     opacity:1;
@@ -109,31 +140,41 @@ body{
     z-index:10;
 }
 
-/* 🌌 文字 */
-h1, h2{
+/* 🌸 文字 */
+h1,h2{
     margin:0;
-    white-space:nowrap;
     font-weight:normal;
-    text-shadow:0 0 10px #fff3c4,0 0 25px #ffd77a;
+
+    line-height:1.8;
+    white-space:normal;
+
+    text-shadow:
+    0 0 10px #fff3c4,
+    0 0 25px #ffd77a;
+
+    max-width:900px;
 }
 
 h1{
     font-size:clamp(32px,6vw,72px);
-    line-height:1.4;
 }
 
 h2{
-    font-size:clamp(22px,4.5vw,42px);
-    line-height:1.4;
+    font-size:clamp(20px,4vw,40px);
 }
 
-/* 🌌 打字 */
+/* 🌸 打字動畫 */
 .typing{
     display:inline-block;
     overflow:hidden;
+
     width:0;
+
     border-right:2px solid white;
-    animation:typing 2.4s steps(30,end) forwards, blink .8s infinite;
+
+    animation:
+    typing 2.8s steps(40,end) forwards,
+    blink .8s infinite;
 }
 
 @keyframes typing{
@@ -145,47 +186,54 @@ h2{
     50%{border-color:transparent;}
 }
 
-/* 🌌 浮現 */
+/* 🌸 浮現 */
 .floatUp{
     opacity:0;
     transform:translateY(40px);
-    animation:floatUp 1.6s ease forwards;
+    animation:floatUp 1.8s ease forwards;
 }
 
 @keyframes floatUp{
-    to{opacity:1;transform:translateY(0);}
-}
-
-/* 🌌 手機 */
-@media(max-width:768px){
-    h1{font-size:clamp(18px,5vw,28px);}
-    h2{font-size:clamp(15px,4vw,22px);}
-}
-
-/* 🌸 粉色連結 */
-a.starlink{
-    color:#f7b6d2 !important;
-    text-decoration:none !important;
-    text-shadow:0 0 8px #f7b6d2,0 0 18px #ff9ecf,0 0 30px #ff7fbf;
-}
-
-a.starlink:hover{
-    color:#ffd1e6 !important;
-}
-
-a.starlink:active{
-    color:#ff4fa3 !important;
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 /* 🌸 圖片 */
 .scene img{
-    width:100vw;
+    width:min(78vw,520px);
     max-width:100%;
-    height:auto;
-    display:block;
+    border-radius:24px;
+
+    box-shadow:
+    0 0 30px rgba(255,220,150,.18),
+    0 0 80px rgba(255,190,120,.12);
+
+    animation:imgIn 1.8s ease forwards;
 }
 
-/* 🌸 圖片退場動畫 */
+/* 🌸 圖片進場 */
+@keyframes imgIn{
+    0%{
+        opacity:0;
+        transform:scale(1.06);
+        filter:blur(10px);
+    }
+
+    60%{
+        opacity:1;
+        filter:blur(3px);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
+}
+
+/* 🌸 圖片退場 */
 .scene img.fade-out{
     animation:imgOut 1.2s ease forwards;
 }
@@ -196,158 +244,189 @@ a.starlink:active{
         transform:scale(1);
         filter:blur(0);
     }
+
     100%{
         opacity:0;
-        transform:scale(0.98);
+        transform:scale(.98);
         filter:blur(8px);
     }
 }
 
-/* 🌌 浮現 */
-.floatUp{
-opacity:0;
-transform:translateY(40px);
-animation:floatUp 1.6s ease forwards;
-}
-
-@keyframes floatUp{
-to{opacity:1;transform:translateY(0);}
-}
-
-/* 🌌 手機 */
-@media(max-width:768px){
-h1{font-size:clamp(18px,5vw,28px);}
-h2{font-size:clamp(15px,4vw,22px);}
-}
-
-/* 🌸 粉色連結（點我進入） */
+/* 🌸 連結 */
 a.starlink{
-color:#f7b6d2 !important;
-text-decoration:none !important;
-text-shadow:0 0 8px #f7b6d2,0 0 18px #ff9ecf,0 0 30px #ff7fbf;
+    color:#f7b6d2;
+    text-decoration:none;
+
+    text-shadow:
+    0 0 8px #f7b6d2,
+    0 0 18px #ff9ecf,
+    0 0 30px #ff7fbf;
 }
 
 a.starlink:hover{
-color:#ffd1e6 !important;
+    color:#ffd1e6;
 }
 
-a.starlink:active{
-color:#ff4fa3 !important;
+/* 🌸 下一頁按鈕 */
+#nextBtn{
+    position:fixed;
+    bottom:38px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:14px;
+    letter-spacing:3px;
+
+    color:#ffe4a8;
+
+    text-shadow:
+    0 0 10px #ffd77a,
+    0 0 25px #ffcc70;
+
+    cursor:pointer;
+    z-index:999;
+
+    animation:blinkBtn 2s infinite;
 }
 
-/* 🌸 圖片回憶進出場 */
-.scene img{
-width:100vw;
-max-width:100%;
-height:auto;
-display:block;
+@keyframes blinkBtn{
+    50%{
+        opacity:.35;
+    }
+}
+
+/* 🌸 手機 */
+@media(max-width:768px){
+
+    h1{
+        font-size:clamp(24px,7vw,36px);
+    }
+
+    h2{
+        font-size:clamp(16px,4.8vw,24px);
+    }
+
+    .scene img{
+        width:88vw;
+    }
 
 }
 
-/* 進場 */
-.scene.active img{
-animation:imgIn 1.6s ease forwards;
-}
-
-/* 離場 */
-.scene img.fade-out{
-animation:imgOut 1.2s ease forwards;
-}
-
-@keyframes imgIn{
-0%{
-opacity:0;
-transform:scale(1.06);
-filter:blur(10px);
-}
-60%{
-opacity:1;
-filter:blur(3px);
-}
-100%{
-opacity:1;
-transform:scale(1);
-filter:blur(0);
-}
-}
-
-@keyframes imgOut{
-0%{
-opacity:1;
-transform:scale(1);
-filter:blur(0);
-}
-100%{
-opacity:0;
-transform:scale(0.98);
-filter:blur(8px);
-}
-}
 </style>
+</head>
 
-</head> 
+<body onclick="startMusic()">
 
-<body onclick="startMusic(); nextScene()">
-
-<!-- 🌌 星層 -->
+<!-- 🌌 星空 -->
 <div class="layer-back"></div>
 <div class="layer-mid"></div>
 <div class="layer-front"></div>
 <div class="scanline"></div>
 <div class="hud"></div>
 
-<!-- 🌌 劇情（全部完整保留） -->
-
+<!-- 🌸 音樂 -->
 <audio id="bgm" src="./time-to-love.mp3" loop></audio>
-<!-- 第一幕 -->
+
+<!-- 🌸 第一幕 -->
 <div class="scene active">
     <div>
-        <h1 class="typing">嗨！我是巧虎</h1>
+        <h1 class="typing">
+            嗨！我是巧虎 🧸
+        </h1>
     </div>
 </div>
 
-<!-- 第二幕 -->
+<!-- 🌸 第二幕 -->
 <div class="scene">
     <div>
         <h2 class="floatUp">
-        還記得嗎？<br>
-        小時候的我們，總會在電視前等著我出現。
+            還記得嗎？<br>
+            小時候總會坐在電視前等著我出現。
         </h2>
     </div>
 </div>
 
-<!-- 第三幕 -->
+<!-- 🌸 第三幕 -->
+<div class="scene">
+    <img src="./qiaohu1.png">
+</div>
+
+<!-- 🌸 第四幕 -->
 <div class="scene">
     <div>
         <h2 class="floatUp">
-        那時候的煩惱很小很小。<br>
-        只要有人陪著，就會很開心。
+            那時候的世界好小。<br><br>
+
+            一首歌、一句鼓勵、<br>
+            一個玩偶陪著自己，<br><br>
+
+            就能開心好久好久。
         </h2>
     </div>
 </div>
 
-<!-- 第四幕 -->
+<!-- 🌸 第五幕 -->
+<div class="scene">
+    <img src="./qiaohu2.png">
+</div>
+
+<!-- 🌸 第六幕 -->
+<div class="scene">
+    <div>
+        <h2 class="floatUp">
+            你曾經跟著我學刷牙、學分享、學勇敢。<br><br>
+
+            難過的時候，<br>
+            也偷偷哭過吧？
+        </h2>
+    </div>
+</div>
+
+<!-- 🌸 第七幕 -->
 <div class="scene">
     <img src="./01.png">
 </div>
 
-<!-- 第五幕 -->
+<!-- 🌸 第八幕 -->
 <div class="scene">
     <div>
         <h2 class="floatUp">
-        原來不知不覺，<br>
-        我們已經長大了呀。
+            原來不知不覺，<br><br>
+
+            我們已經慢慢長大了呀。
         </h2>
     </div>
 </div>
 
-<!-- 第六幕 -->
+<!-- 🌸 第九幕 -->
 <div class="scene">
     <div>
         <h1 class="typing">
-        但我還是會一直陪著你。
+            但沒關係。<br><br>
+
+            我還是會一直陪著你 ✨
         </h1>
     </div>
+</div>
+
+<!-- 🌸 最後 -->
+<div class="scene">
+    <div>
+        <h2 class="floatUp">
+            <a class="starlink"
+            href="https://313119-web.github.io/First-Anniversary/">
+
+            點我回到回憶裡 ✦
+
+            </a>
+        </h2>
+    </div>
+</div>
+
+<!-- 🌸 下一頁 -->
+<div id="nextBtn">
+✦ 點擊繼續 ✦
 </div>
 
 <script>
@@ -355,52 +434,80 @@ filter:blur(8px);
 const bgm = document.getElementById("bgm");
 
 function startMusic(){
+
     if(bgm.paused){
+
         bgm.volume = 0;
+
         bgm.play();
 
         let v = 0;
+
         let fadeIn = setInterval(() => {
+
             v += 0.05;
+
             bgm.volume = v;
-            if(v >= 1) clearInterval(fadeIn);
-        }, 100);
+
+            if(v >= 1){
+                clearInterval(fadeIn);
+            }
+
+        },100);
+
     }
+
 }
 
 function fadeOutMusic(){
+
     let v = bgm.volume;
 
     let timer = setInterval(() => {
+
         v -= 0.05;
+
         bgm.volume = v;
 
         if(v <= 0){
+
             bgm.pause();
+
             clearInterval(timer);
+
         }
-    }, 100);
+
+    },100);
+
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",() => {
 
     let index = 0;
 
     window.nextScene = function(){
 
-        const scenes = document.querySelectorAll(".scene");
-        const currentScene = scenes[index];
+        const scenes =
+        document.querySelectorAll(".scene");
+
+        const currentScene =
+        scenes[index];
 
         if(!currentScene) return;
 
-        const img = currentScene.querySelector("img");
+        const img =
+        currentScene.querySelector("img");
 
-        // 🌸 如果有圖片 → 先退場動畫
+        /* 🌸 圖片退場 */
+
         if(img){
+
             img.classList.add("fade-out");
 
             setTimeout(() => {
+
                 currentScene.classList.remove("active");
+
                 index++;
 
                 if(index === scenes.length - 1){
@@ -410,13 +517,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(index < scenes.length){
                     scenes[index].classList.add("active");
                 }
-            }, 1200);
+
+            },1200);
 
             return;
+
         }
 
-        // 🌸 沒圖片直接切場景
+        /* 🌸 一般場景 */
+
         currentScene.classList.remove("active");
+
         index++;
 
         if(index === scenes.length - 1){
@@ -426,16 +537,32 @@ document.addEventListener("DOMContentLoaded", () => {
         if(index < scenes.length){
             scenes[index].classList.add("active");
         }
+
     };
 
 });
 
-bgm.addEventListener("error", () => {
+/* 🌸 按鈕切頁 */
+
+document.getElementById("nextBtn")
+.onclick = () => {
+
+    nextScene();
+
+};
+
+/* 🌸 音樂檢查 */
+
+bgm.addEventListener("error",() => {
+
     console.log("❌ 音檔載入失敗");
+
 });
 
-bgm.addEventListener("canplaythrough", () => {
+bgm.addEventListener("canplaythrough",() => {
+
     console.log("✔ 音檔已成功載入");
+
 });
 
 </script>
