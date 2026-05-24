@@ -34,19 +34,14 @@ body{
     padding:30px;
     box-sizing:border-box;
 
-    opacity:0;
-    transform:scale(1.03);
-
     transition:all .8s ease;
 }
 
 .scene.active{
     display:flex;
-    opacity:1;
-    transform:scale(1);
 }
 
-/* 🌸 淡藍紅字 */
+/* 🌸 文字（穩定淡藍紅） */
 h1,h2{
     margin:0;
     font-weight:normal;
@@ -54,26 +49,38 @@ h1,h2{
     line-height:1.8;
     max-width:900px;
 
-    background:linear-gradient(90deg,#6fa8ff,#ff8fb1);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+    color:#6fa8ff;
 
     text-shadow:
-    0 2px 8px rgba(0,0,0,.15),
-    0 0 10px rgba(111,168,255,.15),
-    0 0 10px rgba(255,143,177,.12);
+    0 2px 6px rgba(0,0,0,.18),
+    0 0 10px rgba(111,168,255,.15);
 }
 
-h1{font-size:clamp(30px,6vw,64px);}
-h2{font-size:clamp(18px,4vw,38px);}
+/* 🌸 標題粉紅 */
+h1{
+    color:#ff7aa2;
+    font-size:clamp(30px,6vw,64px);
+}
 
-/* 🌸 圖片 */
+h2{
+    font-size:clamp(18px,4vw,38px);
+}
+
+/* 🌸 圖片（關鍵修正） */
 .scene img{
     width:min(80vw,520px);
+    max-width:100%;
+
     border-radius:18px;
 
     box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    display:block;
+}
+
+/* 🌸 debug（如果還沒顯示可以看到框） */
+.scene img{
+    background:#eee;
 }
 
 /* 🌸 按鈕 */
@@ -87,6 +94,7 @@ h2{font-size:clamp(18px,4vw,38px);}
     letter-spacing:3px;
 
     color:#6fa8ff;
+
     cursor:pointer;
 }
 
@@ -95,7 +103,7 @@ h2{font-size:clamp(18px,4vw,38px);}
 
 <body onclick="startMusic()">
 
-<!-- 🌸 音樂（已改） -->
+<!-- 🌸 音樂（你的檔名） -->
 <audio id="bgm" src="./可愛巧虎島.mp3" loop></audio>
 
 <!-- 🌸 第一幕 -->
@@ -111,9 +119,9 @@ h2{font-size:clamp(18px,4vw,38px);}
     </h2>
 </div>
 
-<!-- 🌸 第三幕 -->
+<!-- 🌸 第三幕（11.jpg） -->
 <div class="scene">
-    <img src="./11.png">
+    <img src="./11.jpg" onerror="console.log('11.jpg沒讀到')">
 </div>
 
 <!-- 🌸 第四幕 -->
@@ -124,9 +132,9 @@ h2{font-size:clamp(18px,4vw,38px);}
     </h2>
 </div>
 
-<!-- 🌸 第五幕 -->
+<!-- 🌸 第五幕（12.jpg） -->
 <div class="scene">
-    <img src="./12.png">
+    <img src="./12.jpg" onerror="console.log('12.jpg沒讀到')">
 </div>
 
 <!-- 🌸 第六幕 -->
