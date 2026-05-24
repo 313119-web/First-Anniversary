@@ -13,7 +13,7 @@
     src:url("./DongZhu.ttf") format("truetype");
 }
 
-/* 🌌 基礎（改成白底） */
+/* 🌸 白底基礎 */
 body{
     margin:0;
     overflow:hidden;
@@ -25,15 +25,9 @@ body{
     background:#ffffff;
 
     font-family:"DongZhu","Noto Serif TC",serif;
-    color:#2a2a2a;
 }
 
-/* 🌌 星空層全部隱藏（保留結構但不影響畫面） */
-.layer-back,.layer-mid,.layer-front,.scanline,.hud{
-    display:none;
-}
-
-/* 🌌 場景 */
+/* 🌸 場景 */
 .scene{
     position:absolute;
     inset:0;
@@ -59,7 +53,7 @@ body{
     transform:scale(1);
 }
 
-/* 🌸 文字（淡藍＋淡紅＋柔陰影） */
+/* 🌸 ⭐真正淡藍＋淡紅文字（重點修好） */
 h1,h2{
     margin:0;
     font-weight:normal;
@@ -69,28 +63,30 @@ h1,h2{
 
     max-width:900px;
 
-    /* 🌸 淡藍紅混合字色 */
-    color:transparent;
+    /* 淡藍→淡粉漸層 */
     background:linear-gradient(90deg,#6fa8ff,#ff8fb1);
     -webkit-background-clip:text;
     background-clip:text;
+    color:transparent;
 
-    /* 🌸 柔和陰影 */
+    /* 柔陰影（去掉黃光） */
     text-shadow:
-    0 2px 10px rgba(0,0,0,.18),
-    0 0 14px rgba(111,168,255,.25),
-    0 0 14px rgba(255,143,177,.18);
-} 
-h1{
-    font-size:clamp(32px,6vw,72px);
-    color:#ff7aa2; /* 標題偏粉紅 */
+    0 2px 8px rgba(0,0,0,.18),
+    0 0 10px rgba(111,168,255,.18),
+    0 0 10px rgba(255,143,177,.12);
 }
 
+/* 🌸 標題稍微偏粉紅 */
+h1{
+    font-size:clamp(32px,6vw,72px);
+}
+
+/* 🌸 內容字 */
 h2{
     font-size:clamp(20px,4vw,40px);
 }
 
-/* 🌸 打字（改簡化，不會吃字） */
+/* 🌸 打字效果（穩定版） */
 .typing{
     display:inline-block;
     animation:fadeIn 2s ease forwards;
@@ -134,7 +130,7 @@ h2{
     0 0 25px rgba(255,120,160,.12);
 }
 
-/* 🌸 圖片動畫 */
+/* 🌸 圖片進場 */
 .scene.active img{
     animation:imgIn 1.5s ease forwards;
 }
@@ -152,6 +148,7 @@ h2{
     }
 }
 
+/* 🌸 圖片退場 */
 .scene img.fade-out{
     animation:imgOut 1s ease forwards;
 }
@@ -184,10 +181,9 @@ a.starlink{
     font-size:14px;
     letter-spacing:3px;
 
-    color:#4a78c2;
+    color:#6fa8ff;
 
     cursor:pointer;
-
     opacity:.8;
 }
 
@@ -197,19 +193,9 @@ a.starlink{
 
 /* 🌸 手機 */
 @media(max-width:768px){
-
-    h1{
-        font-size:clamp(24px,7vw,36px);
-    }
-
-    h2{
-        font-size:clamp(16px,4.8vw,24px);
-    }
-
-    .scene img{
-        width:88vw;
-    }
-
+    h1{font-size:clamp(24px,7vw,36px);}
+    h2{font-size:clamp(16px,4.8vw,24px);}
+    .scene img{width:88vw;}
 }
 
 </style>
