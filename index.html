@@ -13,7 +13,7 @@
     src:url("./DongZhu.ttf") format("truetype");
 }
 
-/* 🌌 基礎 */
+/* 🌌 基礎（改成白底） */
 body{
     margin:0;
     overflow:hidden;
@@ -22,90 +22,15 @@ body{
     justify-content:center;
     align-items:center;
 
-    background:
-    radial-gradient(circle at top,#1f2242,#0b0b14 60%);
+    background:#ffffff;
 
     font-family:"DongZhu","Noto Serif TC",serif;
-    color:white;
+    color:#2a2a2a;
 }
 
-/* 🌸 復古粒子 */
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-
-    background-image:
-    radial-gradient(rgba(255,220,160,.15) 1px, transparent 1px);
-
-    background-size:4px 4px;
-
-    opacity:.25;
-    pointer-events:none;
-    mix-blend-mode:screen;
-}
-
-/* 🌌 星空 */
+/* 🌌 星空層全部隱藏（保留結構但不影響畫面） */
 .layer-back,.layer-mid,.layer-front,.scanline,.hud{
-    pointer-events:none;
-}
-
-.layer-back{
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at 20% 30%,rgba(255,255,255,.25)1px,transparent 2px);
-    animation:drift 40s linear infinite;
-    opacity:.5;
-}
-
-.layer-mid{
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at 60% 50%,rgba(255,230,180,.4)1.5px,transparent 3px);
-    animation:drift 25s linear infinite;
-    opacity:.6;
-}
-
-.layer-front{
-    position:fixed;
-    inset:0;
-    background:
-    radial-gradient(circle at 30% 80%,rgba(255,255,255,.8)2px,transparent 3px);
-    animation:drift 12s linear infinite;
-    opacity:.8;
-}
-
-@keyframes drift{
-    from{transform:translateY(0);}
-    to{transform:translateY(-120px);}
-}
-
-/* 🌌 HUD */
-.hud{
-    position:fixed;
-    inset:0;
-    border:1px solid rgba(255,230,150,.12);
-}
-
-/* 🌌 掃描線 */
-.scanline{
-    position:fixed;
-    inset:0;
-    background:
-    linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255,230,150,.05),
-    transparent);
-
-    animation:scan 5s linear infinite;
-}
-
-@keyframes scan{
-    from{transform:translateY(-100%);}
-    to{transform:translateY(100%);}
+    display:none;
 }
 
 /* 🌌 場景 */
@@ -124,23 +49,17 @@ body::after{
 
     opacity:0;
     transform:scale(1.03);
-    filter:blur(6px);
 
-    transition:
-    opacity .8s ease,
-    transform .8s ease,
-    filter .8s ease;
+    transition:all .8s ease;
 }
 
 .scene.active{
     display:flex;
     opacity:1;
     transform:scale(1);
-    filter:blur(0);
-    z-index:10;
 }
 
-/* 🌸 文字 */
+/* 🌸 文字（淡藍＋淡紅＋柔陰影） */
 h1,h2{
     margin:0;
     font-weight:normal;
@@ -148,49 +67,47 @@ h1,h2{
     line-height:1.8;
     white-space:normal;
 
-    text-shadow:
-    0 0 10px #fff3c4,
-    0 0 25px #ffd77a;
-
     max-width:900px;
+
+    color:#4a78c2; /* 淡藍 */
+    text-shadow:
+    0 2px 6px rgba(0,0,0,.18),
+    0 0 18px rgba(255,120,160,.15); /* 淡紅光感 */
 }
 
 h1{
     font-size:clamp(32px,6vw,72px);
+    color:#ff7aa2; /* 標題偏粉紅 */
 }
 
 h2{
     font-size:clamp(20px,4vw,40px);
 }
 
-/* 🌸 打字動畫 */
+/* 🌸 打字（改簡化，不會吃字） */
 .typing{
     display:inline-block;
-    overflow:hidden;
-
-    width:0;
-
-    border-right:2px solid white;
-
-    animation:
-    typing 2.8s steps(40,end) forwards,
-    blink .8s infinite;
+    animation:fadeIn 2s ease forwards;
 }
 
-@keyframes typing{
-    from{width:0;}
-    to{width:100%;}
-}
-
-@keyframes blink{
-    50%{border-color:transparent;}
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+        filter:blur(6px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+        filter:blur(0);
+    }
 }
 
 /* 🌸 浮現 */
 .floatUp{
     opacity:0;
     transform:translateY(40px);
-    animation:floatUp 1.8s ease forwards;
+    animation:floatUp 1.6s ease forwards;
 }
 
 @keyframes floatUp{
@@ -204,96 +121,72 @@ h2{
 .scene img{
     width:min(78vw,520px);
     max-width:100%;
-    border-radius:24px;
+    border-radius:18px;
 
     box-shadow:
-    0 0 30px rgba(255,220,150,.18),
-    0 0 80px rgba(255,190,120,.12);
-
-    animation:imgIn 1.8s ease forwards;
+    0 8px 25px rgba(0,0,0,.15),
+    0 0 25px rgba(255,120,160,.12);
 }
 
-/* 🌸 圖片進場 */
+/* 🌸 圖片動畫 */
+.scene.active img{
+    animation:imgIn 1.5s ease forwards;
+}
+
 @keyframes imgIn{
-    0%{
+    from{
         opacity:0;
-        transform:scale(1.06);
-        filter:blur(10px);
+        transform:scale(1.05);
+        filter:blur(8px);
     }
-
-    60%{
-        opacity:1;
-        filter:blur(3px);
-    }
-
-    100%{
+    to{
         opacity:1;
         transform:scale(1);
         filter:blur(0);
     }
 }
 
-/* 🌸 圖片退場 */
 .scene img.fade-out{
-    animation:imgOut 1.2s ease forwards;
+    animation:imgOut 1s ease forwards;
 }
 
 @keyframes imgOut{
-    0%{
+    from{
         opacity:1;
         transform:scale(1);
-        filter:blur(0);
     }
-
-    100%{
+    to{
         opacity:0;
-        transform:scale(.98);
-        filter:blur(8px);
+        transform:scale(.95);
     }
 }
 
 /* 🌸 連結 */
 a.starlink{
-    color:#f7b6d2;
+    color:#ff7aa2;
     text-decoration:none;
-
-    text-shadow:
-    0 0 8px #f7b6d2,
-    0 0 18px #ff9ecf,
-    0 0 30px #ff7fbf;
+    text-shadow:0 2px 10px rgba(255,120,160,.25);
 }
 
-a.starlink:hover{
-    color:#ffd1e6;
-}
-
-/* 🌸 下一頁按鈕 */
+/* 🌸 按鈕 */
 #nextBtn{
     position:fixed;
-    bottom:38px;
+    bottom:40px;
     left:50%;
-
     transform:translateX(-50%);
 
     font-size:14px;
     letter-spacing:3px;
 
-    color:#ffe4a8;
-
-    text-shadow:
-    0 0 10px #ffd77a,
-    0 0 25px #ffcc70;
+    color:#4a78c2;
 
     cursor:pointer;
-    z-index:999;
 
-    animation:blinkBtn 2s infinite;
+    opacity:.8;
 }
 
-@keyframes blinkBtn{
-    50%{
-        opacity:.35;
-    }
+#nextBtn:hover{
+    opacity:1;
 }
 
 /* 🌸 手機 */
@@ -318,33 +211,19 @@ a.starlink:hover{
 
 <body onclick="startMusic()">
 
-<!-- 🌌 星空 -->
-<div class="layer-back"></div>
-<div class="layer-mid"></div>
-<div class="layer-front"></div>
-<div class="scanline"></div>
-<div class="hud"></div>
-
-<!-- 🌸 音樂 -->
 <audio id="bgm" src="./time-to-love.mp3" loop></audio>
 
 <!-- 🌸 第一幕 -->
 <div class="scene active">
-    <div>
-        <h1 class="typing">
-            嗨！我是巧虎 🧸
-        </h1>
-    </div>
+    <h1 class="typing">嗨！我是巧虎 🧸</h1>
 </div>
 
 <!-- 🌸 第二幕 -->
 <div class="scene">
-    <div>
-        <h2 class="floatUp">
-            還記得嗎？<br>
-            小時候總會坐在電視前等著我出現。
-        </h2>
-    </div>
+    <h2 class="floatUp">
+        還記得嗎？<br>
+        小時候總會坐在電視前等著我出現。
+    </h2>
 </div>
 
 <!-- 🌸 第三幕 -->
@@ -354,16 +233,10 @@ a.starlink:hover{
 
 <!-- 🌸 第四幕 -->
 <div class="scene">
-    <div>
-        <h2 class="floatUp">
-            那時候的世界好小。<br><br>
-
-            一首歌、一句鼓勵、<br>
-            一個玩偶陪著自己，<br><br>
-
-            就能開心好久好久。
-        </h2>
-    </div>
+    <h2 class="floatUp">
+        那時候的世界好小。<br>
+        一首歌、一個玩偶、一句鼓勵。
+    </h2>
 </div>
 
 <!-- 🌸 第五幕 -->
@@ -373,14 +246,10 @@ a.starlink:hover{
 
 <!-- 🌸 第六幕 -->
 <div class="scene">
-    <div>
-        <h2 class="floatUp">
-            你曾經跟著我學刷牙、學分享、學勇敢。<br><br>
-
-            難過的時候，<br>
-            也偷偷哭過吧？
-        </h2>
-    </div>
+    <h2 class="floatUp">
+        你曾經學刷牙、學分享、學勇敢。<br>
+        也曾經偷偷哭過吧？
+    </h2>
 </div>
 
 <!-- 🌸 第七幕 -->
@@ -390,180 +259,85 @@ a.starlink:hover{
 
 <!-- 🌸 第八幕 -->
 <div class="scene">
-    <div>
-        <h2 class="floatUp">
-            原來不知不覺，<br><br>
-
-            我們已經慢慢長大了呀。
-        </h2>
-    </div>
+    <h2 class="floatUp">
+        原來不知不覺，我們已經長大了。
+    </h2>
 </div>
 
 <!-- 🌸 第九幕 -->
 <div class="scene">
-    <div>
-        <h1 class="typing">
-            但沒關係。<br><br>
-
-            我還是會一直陪著你 ✨
-        </h1>
-    </div>
+    <h1 class="typing">
+        但我還是會一直陪著你 ✨
+    </h1>
 </div>
 
 <!-- 🌸 最後 -->
 <div class="scene">
-    <div>
-        <h2 class="floatUp">
-            <a class="starlink"
-            href="https://313119-web.github.io/First-Anniversary/">
-
+    <h2>
+        <a class="starlink" href="https://313119-web.github.io/First-Anniversary/">
             點我回到回憶裡 ✦
-
-            </a>
-        </h2>
-    </div>
+        </a>
+    </h2>
 </div>
 
-<!-- 🌸 下一頁 -->
-<div id="nextBtn">
-✦ 點擊繼續 ✦
-</div>
+<div id="nextBtn">✦ 點擊繼續 ✦</div>
 
 <script>
 
 const bgm = document.getElementById("bgm");
 
 function startMusic(){
-
     if(bgm.paused){
-
         bgm.volume = 0;
-
         bgm.play();
 
         let v = 0;
-
-        let fadeIn = setInterval(() => {
-
+        let t = setInterval(()=>{
             v += 0.05;
-
             bgm.volume = v;
-
-            if(v >= 1){
-                clearInterval(fadeIn);
-            }
-
+            if(v >= 1) clearInterval(t);
         },100);
-
     }
-
 }
 
-function fadeOutMusic(){
-
-    let v = bgm.volume;
-
-    let timer = setInterval(() => {
-
-        v -= 0.05;
-
-        bgm.volume = v;
-
-        if(v <= 0){
-
-            bgm.pause();
-
-            clearInterval(timer);
-
-        }
-
-    },100);
-
-}
-
-document.addEventListener("DOMContentLoaded",() => {
+document.addEventListener("DOMContentLoaded",()=>{
 
     let index = 0;
 
     window.nextScene = function(){
 
-        const scenes =
-        document.querySelectorAll(".scene");
+        const scenes = document.querySelectorAll(".scene");
+        const current = scenes[index];
 
-        const currentScene =
-        scenes[index];
+        if(!current) return;
 
-        if(!currentScene) return;
-
-        const img =
-        currentScene.querySelector("img");
-
-        /* 🌸 圖片退場 */
+        const img = current.querySelector("img");
 
         if(img){
-
             img.classList.add("fade-out");
 
-            setTimeout(() => {
-
-                currentScene.classList.remove("active");
-
+            setTimeout(()=>{
+                current.classList.remove("active");
                 index++;
-
-                if(index === scenes.length - 1){
-                    fadeOutMusic();
-                }
-
                 if(index < scenes.length){
                     scenes[index].classList.add("active");
                 }
-
-            },1200);
+            },1000);
 
             return;
-
         }
 
-        /* 🌸 一般場景 */
-
-        currentScene.classList.remove("active");
-
+        current.classList.remove("active");
         index++;
-
-        if(index === scenes.length - 1){
-            fadeOutMusic();
-        }
 
         if(index < scenes.length){
             scenes[index].classList.add("active");
         }
-
     };
 
 });
 
-/* 🌸 按鈕切頁 */
-
-document.getElementById("nextBtn")
-.onclick = () => {
-
-    nextScene();
-
-};
-
-/* 🌸 音樂檢查 */
-
-bgm.addEventListener("error",() => {
-
-    console.log("❌ 音檔載入失敗");
-
-});
-
-bgm.addEventListener("canplaythrough",() => {
-
-    console.log("✔ 音檔已成功載入");
-
-});
+document.getElementById("nextBtn").onclick = ()=> nextScene();
 
 </script>
 
